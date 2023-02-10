@@ -39,7 +39,7 @@ const Url = process.env.Mongo_Url;
 const start = async()=>{
  try {
    const conn =await connect(Url);
-    console.log(`database connected at `);//${conn.connection.host}
+    console.log(`database connected `);
   app.listen(PORT,()=>{
     console.log(`server conected at http://localhost:${PORT}`);
    }) 
