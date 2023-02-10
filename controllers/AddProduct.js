@@ -1,5 +1,5 @@
 const ProductSchema = require("../models/ProductSchema");
-const MapCloudinaryImgDataToImgObject = require("../utils/MapCloudinaryImg");
+const MapCloudinaryImgDataToImgObject = require("../utils/MapCloudinaryImg")
 
 const addProducts = async (req, res, next) => {
   try {
@@ -47,13 +47,17 @@ const addProducts = async (req, res, next) => {
         stars,
         reviews,
         price,
-        image: images,
+        image:images
       });
-
       return res.status(201).json({ code: 1 });
+
+      
     }
+
+   
   } catch (error) {
     return res.status(500).send(`There was an error: ${error.message}`);
-   next(error)
   }
 };
+
+module.exports=addProducts

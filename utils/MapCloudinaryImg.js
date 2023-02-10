@@ -1,12 +1,13 @@
 
-const  MapCloudinaryImgDataToImgObject=(Urls,ProductIDs)=> {
+const  MapCloudinaryImgDataToImgObject = (Urls,ProductIDs)=> {
     return Urls.map((url, index) => {
         return {
-          filename: `productImage-${index}.jpeg`,
+          filename: `Image-${index}.jpeg`,
           url: url,
           productId: ProductIDs[index]
         }
+        
       });
 }
 
- module.exports = MapCloudinaryImgDataToImgObject
+module.exports=MapCloudinaryImgDataToImgObject

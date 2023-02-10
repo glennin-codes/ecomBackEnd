@@ -5,8 +5,7 @@ const mongoose =  require('mongoose')
       required: true
     },
     company: {
-      type: String,
-      
+      type: String, 
     },
     description: {
       type: String,
@@ -21,7 +20,7 @@ const mongoose =  require('mongoose')
     },
     stars: {
       type: Number,
-   e
+
     },
     reviews: {
       type: Number,
