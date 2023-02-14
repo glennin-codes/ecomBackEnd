@@ -3,6 +3,7 @@ const createError = require('http-errors');
 const morgan = require('morgan');
 const connect = require('./db/config');
 const cors=require('cors')
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
@@ -40,7 +41,8 @@ const Url = process.env.Mongo_Url;
 
 const start = async()=>{
  try {
-   const conn =await connect(Url);
+  mongoose.set("strictQuery", false);
+   await connect(Url);
     console.log(`database connected `);
   app.listen(PORT,()=>{
     console.log(`server conected at http://localhost:${PORT}`);
