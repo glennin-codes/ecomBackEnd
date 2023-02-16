@@ -1,4 +1,5 @@
 const addProducts = require('../controllers/AddProduct');
+const deleteProduct = require('../controllers/deleteProduct');
 const getAllProducts = require('../controllers/getAllProduct');
 const getSingleProduct = require('../controllers/getSingleProduct');
 const router = require('express').Router();
@@ -8,7 +9,7 @@ router.get('/', async (_req, res, next) => {
 });
 router.post('/addProduct',addProducts)
 router.get('/products/:dataAmount',getAllProducts)
-router.route('/product/:productId').get(getSingleProduct)
+router.route('/product/:productId').get(getSingleProduct).delete(deleteProduct).patch()
 
 
 
