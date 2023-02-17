@@ -1,5 +1,5 @@
 const ProductSchema = require('../models/ProductSchema');
-const cloudinary = require('cloudinary').v2;
+const cloudinary =require("../utils/Cloudinary")
 
 const deleteProduct = async (req, res, next) => {
   try {
