@@ -9,7 +9,7 @@ router.get('/', async (_req, res, next) => {
 });
 router.post('/addProduct',addProducts)
 router.get('/products/:dataAmount',getAllProducts)
-router.route('/product/:productId').get(getSingleProduct).delete(deleteProduct).patch()
+router.route('/product/:id').get(getSingleProduct).delete(deleteProduct).patch()
 
 
 
