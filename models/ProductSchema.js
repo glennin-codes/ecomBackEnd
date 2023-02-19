@@ -47,7 +47,6 @@ const mongoose =  require('mongoose')
     ],
     colors: {
       type: [String],
-    
     },
   });
   
