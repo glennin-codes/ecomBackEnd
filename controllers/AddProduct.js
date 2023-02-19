@@ -14,30 +14,30 @@ const addProducts = async (req, res, next) => {
       price,
       image,
     } = req.body;
-    if (image) {
-      const promises = [];
-      image.forEach(
-        async((img) => {
-          promises.push(
-            cloudinary.uploader.upload(img, {
-              folder: "shopify",
-            })
-          );
-        })
-      );
+    // if (image) {
+    //   const promises = [];
+    //   image.forEach(
+    //     async((img) => {
+    //       promises.push(
+    //         cloudinary.uploader.upload(img, {
+    //           folder: "shopify",
+    //         })
+    //       );
+    //     })
+    //   );
 
-      const response = await Promise.all(promises);
-      if (!response) {
-        throw new Error("failed to upload to cloudinary");
-      }
+    //   const response = await Promise.all(promises);
+    //   if (!response) {
+    //     throw new Error("failed to upload to cloudinary");
+    //   }
 
-      const productImageUrls = response.secure_url;
-      const publicIds = response.public_id;
+    //   const productImageUrls = response.secure_url;
+    //   const publicIds = response.public_id;
 
-      const images = MapCloudinaryImgDataToImgObject(
-        productImageUrls,
-        publicIds
-      );
+    //   const images = MapCloudinaryImgDataToImgObject(
+    //     productImageUrls,
+    //     publicIds
+    //   );
       await ProductSchema.create({
         name,
         company,
@@ -47,12 +47,12 @@ const addProducts = async (req, res, next) => {
         stars,
         reviews,
         price,
-        image:images
+        image
       });
       return res.status(201).json({ code: 1 });
 
       
-    }
+    // }
 
    
   } catch (error) {
