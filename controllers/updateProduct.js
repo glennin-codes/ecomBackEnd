@@ -101,6 +101,7 @@ const updateProduct = async (req, res, next) => {
       reviews,
       price,
       image,
+      colors
     } = req.body;
 
     const product = await ProductSchema.findById(id);
@@ -117,6 +118,7 @@ const updateProduct = async (req, res, next) => {
     product.stars = stars;
     product.reviews = reviews;
     product.price = price;
+    product.colors = colors;
 
     // Update the product images
     if (image) {

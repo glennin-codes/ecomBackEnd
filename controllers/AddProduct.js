@@ -20,7 +20,7 @@ const addProducts = async (req, res, next) => {
         async((img) => {
           promises.push(
             cloudinary.uploader.upload(img, {
-              folder: "MilesPhotos",
+              folder: "shopify",
             })
           );
         })

@@ -2,7 +2,7 @@ const ProductSchema = require("../models/ProductSchema");
 
 const getAllProducts = async (req, res, next) => {
   try {
-    const { company, category, name, numericFilters } = req.query;
+    const { company, category,color, name, numericFilters } = req.query;
     const queryObject = {};
     if (name) {
       //the foreign expression below is for pattern matching where all strings matching with the name query are returned. options i is for ignoring thre caps or small
@@ -15,7 +15,9 @@ const getAllProducts = async (req, res, next) => {
     if (category) {
       queryObject.category = category;
     }
-
+    if (color) {
+      queryObject.colors = { $in: [color] };
+    }
     //filtering by price
 
     if (numericFilters) {

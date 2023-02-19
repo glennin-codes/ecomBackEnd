@@ -40,11 +40,15 @@ const mongoose =  require('mongoose')
           type: String,
        
         },
-        product_id:{
+        product_id:{omm
             type:String,
         }
       }
-    ]
+    ],
+    colors: {
+      type: [String],
+    
+    },
   });
   
   module.exports=mongoose.model('Products',productSchema);
