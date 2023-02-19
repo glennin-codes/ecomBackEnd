@@ -40,7 +40,7 @@ const mongoose =  require('mongoose')
           type: String,
        
         },
-        product_id:{omm
+        product_id:{
             type:String,
         }
       }
