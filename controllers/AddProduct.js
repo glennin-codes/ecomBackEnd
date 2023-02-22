@@ -14,6 +14,7 @@ const addProducts = async (req, res, next) => {
       price,
       image,
     } = req.body;
+    console.log(image);
     if (image) {
       const promises = [];
       image.forEach(

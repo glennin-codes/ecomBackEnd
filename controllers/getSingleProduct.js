@@ -11,15 +11,15 @@ const getSingleProduct=async(req,res,next)=>{
 
     try {
        
-        const product = await ProductSchema.findOne({ _id:id});
+        const data= await ProductSchema.findOne({ _id:id});
 
 
-        console.log(product)
+        console.log(data)
 
 
 
 
-       res.status(200).send({"data": product})
+       res.status(200).json(data)
      
 
         
