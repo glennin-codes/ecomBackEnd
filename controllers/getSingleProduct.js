@@ -4,9 +4,9 @@ const ProductSchema = require("../models/ProductSchema");
 const getSingleProduct=async(req,res,next)=>{
     // console.log(req.params)
 
-    const id = req.params.id;
+    // const id = req.params.id;
     // const id = req.query
-    // const id = req.query.id
+    const id = req.query.id
     console.log(id);
 
     try {
