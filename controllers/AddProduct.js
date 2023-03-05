@@ -1,6 +1,3 @@
-const ProductSchema = require("../models/ProductSchema");
-const MapCloudinaryImgDataToImgObject = require("../utils/MapCloudinaryImg")
-const cloudinary = require("../utils/Cloudinary");
 const addProducts = async (req, res, next) => {
   try {
     const {
@@ -12,53 +9,36 @@ const addProducts = async (req, res, next) => {
       stars,
       reviews,
       price,
-      image,
+      images, // array of { file: File, color: string } objects
     } = req.body;
-    console.log(image);
-    if (image) {
-      const promises = [];
-      image.forEach(
-        async((img) => {
-          promises.push(
-            cloudinary.uploader.upload(img, {
-              folder: "shopify",
-            })
-          );
-        })
-      );
-
-      const response = await Promise.all(promises);
-      if (!response) {
-        throw new Error("failed to upload to cloudinary");
-      }
-
-      const productImageUrls = response.secure_url;
-      const publicIds = response.public_id;
-
-      const images = MapCloudinaryImgDataToImgObject(
-        productImageUrls,
-        publicIds
-      );
-      await ProductSchema.create({
-        name,
-        company,
-        description,
-        category,
-        stock,
-        stars,
-        reviews,
-        price,
-        image:images
-      });
-      return res.status(201).json({ code: 1 });
-
-      
-    }
-
-   
+    
+    const promises = images.map(async ({ file, color }) => {
+      const { secure_url, public_id } = await cloudinary.uploader.upload(file.path, { folder: 'shopify' });
+      return { color, url: secure_url, public_id };
+    });
+    
+    const imageResponses = await Promise.all(promises);
+    
+    const imageObjects = imageResponses.map(({ color, url, public_id }) => ({ filename: public_id, url, product_id: public_id, color }));
+    
+    const product = new ProductSchema({
+      name,
+      company,
+      description,
+      category,
+      stock,
+      stars,
+      reviews,
+      price,
+      image: imageObjects,
+      colors: [...new Set(images.map(({ color }) => color))],
+    });
+    
+    await product.save();
+    
+    return res.status(201).json({ code: 1 });
   } catch (error) {
     return res.status(500).send(`There was an error: ${error.message}`);
+  next(error)
   }
 };
-
-module.exports=addProducts
