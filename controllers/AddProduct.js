@@ -12,8 +12,8 @@ const addProducts = async (req, res, next) => {
       images, // array of { file: File, color: string } objects
     } = req.body;
     
-    const promises = images.map(async ({ file, color }) => {
-      const { secure_url, public_id } = await cloudinary.uploader.upload(file.path, { folder: 'shopify' });
+    const promises = images.map(async ({ data, color }) => {
+      const { secure_url, public_id } = await cloudinary.uploader.upload(data, { folder: 'shopify' });
       return { color, url: secure_url, public_id };
     });
     
@@ -38,6 +38,7 @@ const addProducts = async (req, res, next) => {
     
     return res.status(201).json({ code: 1 });
   } catch (error) {
+    console.log(error);
     return res.status(500).send(`There was an error: ${error.message}`);
   next(error)
   }
