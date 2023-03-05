@@ -16,7 +16,7 @@ const addProducts = async (req, res, next) => {
       const { secure_url, public_id } = await cloudinary.uploader.upload(data, { folder: 'shopify' });
       return { color, url: secure_url, public_id };
     });
-    
+    console.log(images)
     const imageResponses = await Promise.all(promises);
     
     const imageObjects = imageResponses.map(({ color, url, public_id }) => ({ filename: public_id, url, product_id: public_id, color }));
