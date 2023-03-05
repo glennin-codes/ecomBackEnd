@@ -42,3 +42,4 @@ const addProducts = async (req, res, next) => {
   next(error)
   }
 };
+module.exports=addProducts
