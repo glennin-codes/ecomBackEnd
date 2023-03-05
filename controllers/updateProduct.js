@@ -86,8 +86,7 @@
 
 const ProductSchema = require("../models/ProductSchema");
 const MapCloudinaryImgDataToImgObject = require("../utils/MapCloudinaryImg")
-const cloudinary = require("../utils/Cloudinary");
-
+const cloudinary = require("../utils/Cloudinary")
 const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;

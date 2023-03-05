@@ -1,3 +1,6 @@
+const ProductSchema = require("../models/ProductSchema");
+const cloudinary = require("../utils/Cloudinary");
+
 const addProducts = async (req, res, next) => {
   try {
     const {
@@ -40,7 +43,7 @@ const addProducts = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     return res.status(500).send(`There was an error: ${error.message}`);
-  next(error)
+  
   }
 };
 module.exports=addProducts
