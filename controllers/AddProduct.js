@@ -41,7 +41,7 @@ const addProducts = async (req, res, next) => {
     
     return res.status(201).json({ code: 1 });
   } catch (error) {
-    console.log("fuck this",error);
+ 
     return res.status(500).send(`There was an error: ${error.message}`);
   
   }
