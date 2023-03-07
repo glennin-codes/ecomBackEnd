@@ -82,45 +82,36 @@
 
 // module.exports = updateProduct;
 
-
-
 const ProductSchema = require("../models/ProductSchema");
-const MapCloudinaryImgDataToImgObject = require("../utils/MapCloudinaryImg")
-const cloudinary = require("../utils/Cloudinary")
+// const MapCloudinaryImgDataToImgObject = require("../utils/MapCloudinaryImg");
+// const cloudinary = require("../utils/Cloudinary");
+
 const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id)
-    
-    const {
-      name,
-      company,
-      description,
-      category,
-      stock,
-      stars,
-      reviews,
-      price,
-//       image,
-//       colors
-    } = req.body;
 
-    const product = await ProductSchema.findOne({ _id:id});
-    console.log(product);
-    if (!product) {
+    // Extract the fields to update from the request body
+    const fieldsToUpdate = req.body;
+
+    // Update the product document in the database
+    const result = await ProductSchema.updateOne({ _id: id }, { $set: fieldsToUpdate });
+
+    if (result.nModified === 0) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Update the product data
-    product.name = name;
-    product.company = company;
-//     product.description = description;
-    product.category = category;
-    product.stock = stock;
-//     product.stars = stars;
-//     product.reviews = reviews;
-    product.price = price;
-//     product.colors = colors;
+    return res.status(200).json({ code: 1 });
+  } catch (error) {
+   
+    console.error(error);
+    return res.status(500).send(`There was an error: ${error.message}`);
+  }
+};
+
+module.exports = updateProduct;
+
+
+
 
     // Update the product images
 //     if (image) {
@@ -154,15 +145,3 @@ const updateProduct = async (req, res, next) => {
 
 //       product.image = newImages;
 //     }
-
-    await product.save();
-    return res.status(200).json({ code: 1 });
-  } catch (error) {
-    next(error)
-    console.error(error);
-    return res.status(500).send(`There was an error: ${error.message}`);
-    
-  }
-};
-
-module.exports = updateProduct;

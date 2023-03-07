@@ -2,7 +2,7 @@ const mongoose =  require('mongoose')
  const productSchema = new mongoose.Schema({
     name: {
       type: String,
-      required: true
+      
     },
     company: {
       type: String, 
@@ -28,7 +28,7 @@ const mongoose =  require('mongoose')
     },
     price: {
       type: Number,
-      required: true
+     
     },
     image: [
       {
