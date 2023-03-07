@@ -106,6 +106,7 @@ const updateProduct = async (req, res, next) => {
     } = req.body;
 
     const product = await ProductSchema.findOne({ _id:id});
+    console.log(product);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -157,8 +158,10 @@ const updateProduct = async (req, res, next) => {
     await product.save();
     return res.status(200).json({ code: 1 });
   } catch (error) {
+    next(error)
+    console.error(error);
     return res.status(500).send(`There was an error: ${error.message}`);
-    console.log(error)
+    
   }
 };
 
