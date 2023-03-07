@@ -99,11 +99,11 @@ const updateProduct = async (req, res, next) => {
       stars,
       reviews,
       price,
-      image,
-      colors
+//       image,
+//       colors
     } = req.body;
 
-    const product = await ProductSchema.findById(id);
+    const product = await ProductSchema.findById(_id :id);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -111,46 +111,46 @@ const updateProduct = async (req, res, next) => {
     // Update the product data
     product.name = name;
     product.company = company;
-    product.description = description;
+//     product.description = description;
     product.category = category;
     product.stock = stock;
-    product.stars = stars;
-    product.reviews = reviews;
+//     product.stars = stars;
+//     product.reviews = reviews;
     product.price = price;
-    product.colors = colors;
+//     product.colors = colors;
 
     // Update the product images
-    if (image) {
-      const promises = [];
-      product.image.forEach((img) => {
-        promises.push(
-          cloudinary.uploader.destroy(img.public_id, {
-            invalidate: true,
-          })
-        );
-      });
-      const response = await Promise.all(promises);
+//     if (image) {
+//       const promises = [];
+//       product.image.forEach((img) => {
+//         promises.push(
+//           cloudinary.uploader.destroy(img.public_id, {
+//             invalidate: true,
+//           })
+//         );
+//       });
+//       const response = await Promise.all(promises);
 
-      const newImages = [];
-      const imageUrls = [];
-      const publicIds = [];
+//       const newImages = [];
+//       const imageUrls = [];
+//       const publicIds = [];
 
-      for (let i = 0; i < image.length; i++) {
-        const img = image[i];
-        const result = await cloudinary.uploader.upload(img, {
-          folder: "MilesPhotos",
-        });
-      newImages.push({
-  filename: `Image-${i}.jpeg`,
-  url: result.secure_url,
-  productId: result.public_id,
-});
-        imageUrls.push(result.secure_url);
-        publicIds.push(result.public_id);
-      }
+//       for (let i = 0; i < image.length; i++) {
+//         const img = image[i];
+//         const result = await cloudinary.uploader.upload(img, {
+//           folder: "MilesPhotos",
+//         });
+//       newImages.push({
+//   filename: `Image-${i}.jpeg`,
+//   url: result.secure_url,
+//   productId: result.public_id,
+// });
+//         imageUrls.push(result.secure_url);
+//         publicIds.push(result.public_id);
+//       }
 
-      product.image = newImages;
-    }
+//       product.image = newImages;
+//     }
 
     await product.save();
     return res.status(200).json({ code: 1 });
