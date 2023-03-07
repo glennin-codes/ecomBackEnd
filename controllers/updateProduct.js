@@ -103,7 +103,7 @@ const updateProduct = async (req, res, next) => {
 //       colors
     } = req.body;
 
-    const product = await ProductSchema.findById(_id :id);
+    const product = await ProductSchema.findOne({ _id:id});
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
