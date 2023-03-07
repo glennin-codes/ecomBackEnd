@@ -90,6 +90,8 @@ const cloudinary = require("../utils/Cloudinary")
 const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(id)
+    
     const {
       name,
       company,
@@ -156,6 +158,7 @@ const updateProduct = async (req, res, next) => {
     return res.status(200).json({ code: 1 });
   } catch (error) {
     return res.status(500).send(`There was an error: ${error.message}`);
+    console.log(error)
   }
 };
 
