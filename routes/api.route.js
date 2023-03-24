@@ -3,6 +3,7 @@ const deleteProduct = require('../controllers/deleteProduct');
 const getAllProducts = require('../controllers/getAllProduct');
 const getSingleProduct = require('../controllers/getSingleProduct');
 const updateProduct = require('../controllers/updateProduct');
+const deleteUser = require('../controllers/User/DeleteUser');
 const UpdateUser = require('../controllers/User/UpdateUser');
 const authenticateToken = require('../Middleware/AuthMiddleware');
 const router = require('express').Router();
