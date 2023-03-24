@@ -1,5 +1,7 @@
+const User = require("../../models/user");
+
 // Update user by ID
-app.put('/api/user/:id', authenticateToken, async (req, res) => {
+const UpdateUser= async (req,next, res) => {
     const { id } = req.params;
     const { firstName, lastName, email, phone, location, school, longitude, latitude } = req.body;
   
@@ -23,6 +25,8 @@ app.put('/api/user/:id', authenticateToken, async (req, res) => {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
+
     }
-  });
+  };
+module.exports =UpdateUser;
   
