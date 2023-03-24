@@ -48,6 +48,9 @@ const mongoose =  require('mongoose')
     colors: {
       type: [String],
     },
+    user: {
+      type: String,
+    },
   });
   
   module.exports=mongoose.model('Products',productSchema);
