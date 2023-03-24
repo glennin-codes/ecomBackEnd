@@ -18,8 +18,8 @@ router.get('/', async (_req, res, next) => {
 router.post('/addProduct',authenticateToken,addProducts)
 router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)
-router.route('/api/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
-router.route('api/user/').get(getAllUsers).post(registerUser).post(loginUser)
+router.route('/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
+router.route('/user/').get(getAllUsers).post(registerUser).post(loginUser)
 
 
 module.exports = router;
