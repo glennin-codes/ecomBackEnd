@@ -1,4 +1,6 @@
 const addProducts = require('../controllers/AddProduct');
+const loginUser = require('../controllers/auth/login');
+const { registerUser } = require('../controllers/auth/regester');
 const deleteProduct = require('../controllers/deleteProduct');
 const getAllProducts = require('../controllers/getAllProduct');
 const getSingleProduct = require('../controllers/getSingleProduct');
@@ -17,7 +19,7 @@ router.post('/addProduct',authenticateToken,addProducts)
 router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)
 router.route('/api/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
-router.get('api/user/',getAllUsers).post()
+router.route('api/user/').get(getAllUsers).post(registerUser).post(loginUser)
 
 
 module.exports = router;
