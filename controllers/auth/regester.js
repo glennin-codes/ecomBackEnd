@@ -1,7 +1,8 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('./models/user');
+const User = require('../../models/user');
+;
 
 const userSchema = Joi.object({
   firstName: Joi.string().required(),
@@ -12,6 +13,9 @@ const userSchema = Joi.object({
   location: Joi.string().required(),
   school: Joi.string().required(),
   student: Joi.boolean(),
+  longitude: Joi.string(),
+  latitude: Joi.string(),
+
 });
 
 async function registerUser(req, res) {
@@ -37,6 +41,8 @@ async function registerUser(req, res) {
       location: value.location,
       school: value.school,
       student: value.student,
+      longitude:value.longitude,
+      latitude:value.latitude,
     });
 
     await user.save();
