@@ -16,10 +16,11 @@ router.get('/', async (_req, res, next) => {
   res.send({ message: 'Ok api is working 🚀' });
 });
 router.post('/addProduct',authenticateToken,addProducts)
+router.post('/email/contactUs',Emailer)
 router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)
 router.route('/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
-router.route('/user/').get(getAllUsers).post(registerUser).post(loginUser)
+router.route('/user/').get(getAllUsers).post(registerUser).post(loginUser);
 
 
 module.exports = router;

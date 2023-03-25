@@ -1,9 +1,11 @@
-import nodemailer from "nodemailer";
-import { config } from "./Config.js";
-import { google } from "googleapis";
-import dotenv from 'dotenv'
-dotenv.config();
-
+// import nodemailer from "nodemailer";
+// import { config } from "./Config.js";
+// import { google } from "googleapis";
+// import dotenv from 'dotenv'
+// dotenv.config();
+const {google} =require('googleapis');
+const nodemailer=require ('nodemailer');
+const config=require('./util/Config');
 
 
 
@@ -28,7 +30,7 @@ const OAuth2_client = new OAuth2(
   OAuth2_client.setCredentials({ refresh_token: config.refreshToken });
   const myAccessToken= await OAuth2_client.getAccessToken()
   let transpoter = nodemailer.createTransport({
-    service: "gmail", //i use outlook
+    service: "gmail", 
     auth: {
       type: 'OAuth2',
       user: config.user,
