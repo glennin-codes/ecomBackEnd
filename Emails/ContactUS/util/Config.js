@@ -1,6 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
-export const config = {
+
+const config = {
   user:'milesmotorssocialmedia@gmail.com' ,
   clientId:'890764453841-l8eth4k1iiepcf631a2mpvqete3g44ul.apps.googleusercontent.com',
   clientSecret:'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',
@@ -8,3 +7,4 @@ export const config = {
   clientUrl:'https://developers.google.com/oauthplayground',
 
 };
+module.exports=config
