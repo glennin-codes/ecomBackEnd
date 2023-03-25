@@ -1,8 +1,3 @@
-// import nodemailer from "nodemailer";
-// import { config } from "./Config.js";
-// import { google } from "googleapis";
-// import dotenv from 'dotenv'
-// dotenv.config();
 const {google} =require('googleapis');
 const nodemailer=require ('nodemailer');
 const config=require('./util/Config');
@@ -87,4 +82,4 @@ const EmailSender = ({ FirstName, LastName, email, number, message }) => {
   Email(options);
 };
 
-export default EmailSender;
+module.exports= EmailSender;

@@ -9,6 +9,7 @@ const deleteUser = require('../controllers/User/DeleteUser');
 const getAllUsers = require('../controllers/User/getAllUser');
 const getSingleUser = require('../controllers/User/getSingleUser');
 const UpdateUser = require('../controllers/User/UpdateUser');
+const Emailer = require('../Emails/ContactUS/emailer');
 const authenticateToken = require('../Middleware/AuthMiddleware');
 const router = require('express').Router();
 
