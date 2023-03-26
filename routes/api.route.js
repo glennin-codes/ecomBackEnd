@@ -9,7 +9,8 @@ const deleteUser = require('../controllers/User/DeleteUser');
 const getAllUsers = require('../controllers/User/getAllUser');
 const getSingleUser = require('../controllers/User/getSingleUser');
 const UpdateUser = require('../controllers/User/UpdateUser');
-const Emailer = require('../Emails/ContactUS/emailer');
+const EmailSender = require('../Emails/Contactus/EmailSender');
+
 const authenticateToken = require('../Middleware/AuthMiddleware');
 const router = require('express').Router();
 
@@ -17,7 +18,7 @@ router.get('/', async (_req, res, next) => {
   res.send({ message: 'Ok api is working 🚀' });
 });
 router.post('/addProduct',authenticateToken,addProducts)
-router.post('/email/contactUs',Emailer)
+router.post('/email/contactUs',EmailSender)
 router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)
 router.route('/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
