@@ -5,8 +5,7 @@ const User = require('../../models/user');
 ;
 
 const userSchema = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
+  name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   phone: Joi.string().required(),
@@ -15,6 +14,7 @@ const userSchema = Joi.object({
   student: Joi.boolean(),
   longitude: Joi.string(),
   latitude: Joi.string(),
+  
 
 });
 
@@ -31,10 +31,11 @@ async function registerUser(req, res) {
     }
 
     const hashedPassword = await bcrypt.hash(value.password, 10);
+    const verificationCode = Math.floor(Math.random() * 900000) + 100000; // Generate random 6-digit code
 
     const user = new User({
-      firstName: value.firstName,
-      lastName: value.lastName,
+    name: value.name,
+   
       email: value.email,
       password: hashedPassword,
       phone: value.phone,
@@ -43,6 +44,7 @@ async function registerUser(req, res) {
       student: value.student,
       longitude:value.longitude,
       latitude:value.latitude,
+      verificationCode:verificationCode//generated code
     });
 
     await user.save();
