@@ -1,6 +1,7 @@
 const addProducts = require('../controllers/AddProduct');
 const loginUser = require('../controllers/auth/login');
 const { registerUser } = require('../controllers/auth/regester');
+const verifyCode = require('../controllers/auth/verifyingCode');
 const deleteProduct = require('../controllers/deleteProduct');
 const getAllProducts = require('../controllers/getAllProduct');
 const getSingleProduct = require('../controllers/getSingleProduct');
@@ -18,6 +19,7 @@ router.get('/', async (_req, res, next) => {
   res.send({ message: 'Ok api is working 🚀' });
 });
 router.post('/addProduct',authenticateToken,addProducts)
+router.post('/verifyCode',verifyCode)
 router.post('/email/contactUs',EmailSender)
 router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)

@@ -62,7 +62,7 @@ const verify={
   code:verificationCode,
 
 }
-    VerifyEmail(verify)
+    VerifyEmail(verify);
 
     res.status(201).json({ token });
   } catch (error) {
