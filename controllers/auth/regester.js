@@ -10,7 +10,7 @@ const userSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   phone: Joi.string().required(),
-  location: Joi.string().required(),
+  location: Joi.string(),
   school: Joi.string(),
   student: Joi.boolean(),
   longitude: Joi.string(),
