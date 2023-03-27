@@ -46,7 +46,7 @@ const OAuth2_client = new OAuth2(
 }
 
 };
-const VerfyEmail=({email,name})=>{
+const VerifyEmail=({email,name})=>{
     const  options = {
       from: `ComradesBizna <${config.user}>`,
       to: `${email}`,
