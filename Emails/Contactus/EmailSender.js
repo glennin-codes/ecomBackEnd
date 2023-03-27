@@ -46,7 +46,7 @@ const OAuth2_client = new OAuth2(
 }
 
 };
-const VerfyEmail=({email,code})=>{
+const VerfyEmail=({email,name})=>{
     const  options = {
       from: `ComradesBizna <${config.user}>`,
       to: `${email}`,
@@ -66,9 +66,25 @@ const VerfyEmail=({email,code})=>{
                Enquiry From ComradesBiz 
               </p>
               <div style="font-size: .8rem; margin: 0 30px">
-                <p>Hello <b>${FirstName} ${LastName}</b>
-  
-                </p>
+              <p>Dear ${name},
+
+              Thank you for registering for our website! Before you can start using your account, we need to verify your email address. Please click on the following link to complete the verification process:
+              
+              <a href='https://shopify-admin-three.vercel.app/verifyCode?email=${email}&code=${code} '>https://shopify-admin-three.vercel.app/verifyCode?email=${email}&code=${code}  </a>
+              
+              If you are unable to click on the link above, please copy and paste the following URL into your web browser:
+              
+              https://shopify-admin-three.vercel.app/verifyCode?email=${email}&code=${code} 
+              
+              Please note that this link is only valid for the next 24 hours. After that, you will need to request a new verification email.
+              
+              Thank you for your cooperation.
+              
+              Best regards,
+              <a href="shopify-omega-green.vercel.app" >
+              comrazeBizna.com
+              </a>
+              </p>
                 
               </div>
             </div>
@@ -116,4 +132,4 @@ const EmailSender = ({ FirstName, LastName, email, number, message }) => {
   Email(options);
 };
 
-module.exports= EmailSender;
+module.exports={ EmailSender,VerifyEmail };

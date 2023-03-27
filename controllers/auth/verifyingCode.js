@@ -20,3 +20,4 @@ const User = require("../../models/user");
       res.status(500).json({ error: 'Internal server error' });
     }
   }
+  module.exports=verifyCode;

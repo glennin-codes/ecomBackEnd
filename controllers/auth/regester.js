@@ -55,6 +55,7 @@ async function registerUser(req, res) {
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
+    verifyEmail
 
     res.status(201).json({ token });
   } catch (error) {
