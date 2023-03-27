@@ -2,6 +2,7 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
+const { VerifyEmail } = require('../../Emails/Contactus/EmailSender');
 ;
 
 const userSchema = Joi.object({
@@ -55,7 +56,13 @@ async function registerUser(req, res) {
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    verifyEmail
+const verify={
+  email:user.email,
+  name:user.name,
+  code:verificationCode,
+
+}
+    VerifyEmail(verify)
 
     res.status(201).json({ token });
   } catch (error) {
