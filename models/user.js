@@ -26,11 +26,11 @@ const userSchema = new Schema({
   },
   school: {
     type: String,
-    required: true,
+    
   },
   student: {
     type: Boolean,
-    default: true,
+    default: false,
   },
    longitude: {
     type:String,
