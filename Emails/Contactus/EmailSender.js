@@ -46,18 +46,50 @@ const OAuth2_client = new OAuth2(
 }
 
 };
+const VerfyEmail=({email,code})=>{
+    const  options = {
+      from: `ComradesBizna <${config.user}>`,
+      to: `${email}`,
+      subject: `Message From  ComradesBiz Email verification`,
+      html: `
+          <div style="width: 100%; background-color: #f3f9ff; padding: 5rem 0">
+          <div style="max-width: 700px; background-color: white; margin: 0 auto">
+            <div style="width: 100%; background-color:  #bd0548; padding: 20px 0">
+            <a href="shopify-omega-green.vercel.app" ><img
+                src="https://imgs.search.brave.com/jUDBL1q0lAoPiM4Y3REgL5E_D4jw35FfxF4oySSr6G4/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4y/MFJiVThQalV1NW9w/OFg3NVFiUURnSGFF/OCZwaWQ9QXBp"
+                style="width: 100%; height: 70px; object-fit: contain"
+              /></a> 
+            
+            </div>
+            <div style="width: 100%; gap: 10px; padding: 30px 0; display: grid">
+              <p style="font-weight: 800; font-size: 1.2rem; padding: 0 30px">
+               Enquiry From ComradesBiz 
+              </p>
+              <div style="font-size: .8rem; margin: 0 30px">
+                <p>Hello <b>${FirstName} ${LastName}</b>
+  
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+          `,
+        }
+        Email(options)
+}
 
 // send email
 const EmailSender = ({ FirstName, LastName, email, number, message }) => {
-  const options = {
-    from: `MilesMotors <${config.user}>`,
-    to: "ayiendaglen@gmail.com ,kevinmbui@gmail.com,info@amschel.tech",
-    subject: "Message From MILES MOTORS",
+  const  options = {
+    from: `ComradesBizna <${FirstName} ${LastName}>`,
+    to: "ayiendaglen@gmail.com ",
+    subject: `Message From  ComradesBiz ..a customer Enquiry`,
     html: `
         <div style="width: 100%; background-color: #f3f9ff; padding: 5rem 0">
         <div style="max-width: 700px; background-color: white; margin: 0 auto">
           <div style="width: 100%; background-color:  #bd0548; padding: 20px 0">
-          <a href="milemotors.vercel.app" ><img
+          <a href="shopify-omega-green.vercel.app" ><img
               src="https://www.pngall.com/wp-content/uploads/5/Range-Rover-PNG-Image-File.png"
               style="width: 100%; height: 70px; object-fit: contain"
             /></a> 
@@ -65,7 +97,7 @@ const EmailSender = ({ FirstName, LastName, email, number, message }) => {
           </div>
           <div style="width: 100%; gap: 10px; padding: 30px 0; display: grid">
             <p style="font-weight: 800; font-size: 1.2rem; padding: 0 30px">
-            From MilesMotors
+             Enquiry From ComradesBiz 
             </p>
             <div style="font-size: .8rem; margin: 0 30px">
               <p>FullName: <b>${FirstName} ${LastName}</b></p>
@@ -77,6 +109,8 @@ const EmailSender = ({ FirstName, LastName, email, number, message }) => {
         </div>
       </div>
         `,
+
+  
   };
 
   Email(options);
