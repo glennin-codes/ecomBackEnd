@@ -22,7 +22,7 @@ const userSchema = new Schema({
   },
   location: {
     type: String,
-    required: true,
+    
   },
   school: {
     type: String,
