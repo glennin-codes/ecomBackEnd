@@ -21,7 +21,7 @@ router.get('/', async (_req, res, next) => {
 });
 router.post('/addProduct',authenticateToken,addProducts)
 router.post('/verifyCode',verifyCode)
-router.post('/email/contactUs',Emailer)
+router.post('/email/contactUs', Emailer)
 router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)
 router.route('/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
