@@ -1,31 +1,31 @@
-const Joi = require('joi');
+// const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const { VerifyEmail } = require('../../Emails/Contactus/EmailSender');
 ;
 
-const userSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-  phone: Joi.string().required(),
-  location: Joi.string(),
+// const userSchema = Joi.object({
+//   name: Joi.string().required(),
+//   email: Joi.string().email().required(),
+//   password: Joi.string().required(),
+//   phone: Joi.string().required(),
+//   location: Joi.string(),
  
-  student: Joi.boolean(),
-  longitude: Joi.string(),
-  latitude: Joi.string(),
+//   student: Joi.boolean(),
+//   longitude: Joi.string(),
+//   latitude: Joi.string(),
   
 
-});
+// });
 
 async function registerUser(req, res) {
   try {
-    const { error, value } = userSchema.validate(req.body);
-    if (error) {
-      console.log(error.details[0].message )
-      return res.status(400).json({ error: error.details[0].message });
-    }
+    // const { error, value } = userSchema.validate(req.body);
+    // if (error) {
+    //   console.log(error.details[0].message )
+    //   return res.status(400).json({ error: error.details[0].message });
+    // }
 
     const existingUser = await User.findOne({ email: value.email });
     if (existingUser) {
@@ -36,16 +36,15 @@ async function registerUser(req, res) {
     const verificationCode = Math.floor(Math.random() * 900000) + 100000; // Generate random 6-digit code
 
     const user = new User({
-    name: value.name,
-   
-      email: value.email,
+    name: req.body.name,
+      email: req.body.email,
       password: hashedPassword,
-      phone: value.phone,
-      location: value.location,
+      phone: req.body.phone,
+      location: req.body.location,
       school: req.body.school,
-      student: value.student,
-      longitude:value.longitude,
-      latitude:value.latitude,
+      student: req.body.student,
+      longitude:req.body.longitude,
+      latitude:req.body.latitude,
       verificationCode:verificationCode//generated code
     });
 
