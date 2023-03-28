@@ -11,7 +11,7 @@ const userSchema = Joi.object({
   password: Joi.string().required(),
   phone: Joi.string().required(),
   location: Joi.string(),
-  school: Joi.string(),
+ 
   student: Joi.boolean(),
   longitude: Joi.string(),
   latitude: Joi.string(),
@@ -42,7 +42,7 @@ async function registerUser(req, res) {
       password: hashedPassword,
       phone: value.phone,
       location: value.location,
-      school: value.school,
+      school: req.body.school,
       student: value.student,
       longitude:value.longitude,
       latitude:value.latitude,
