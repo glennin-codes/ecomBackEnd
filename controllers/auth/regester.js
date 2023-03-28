@@ -32,7 +32,7 @@ async function registerUser(req, res) {
       return res.status(409).json({ error: 'Email already registered' });
     }
 
-    const hashedPassword = await bcrypt.hash(value.password, 10);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const verificationCode = Math.floor(Math.random() * 900000) + 100000; // Generate random 6-digit code
 
     const user = new User({
