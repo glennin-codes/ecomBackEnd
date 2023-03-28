@@ -4,7 +4,7 @@ const Mailgen = require('mailgen');
 
 const { EMAIL, PASSWORD } = require('./util/Config')
 
-const sendMail= (message) => {
+const sendMail= (options) => {
 
   let config = {
     service : 'gmail',
@@ -17,14 +17,21 @@ const sendMail= (message) => {
 let transporter = nodemailer.createTransport(config);
 
 
-  transporter.sendMail(message).then(() => {
+  transporter.sendMail(options).then((error,info) => {
+if (info && info.response){
+  console.log('Email sent: ' + info.response);
 
-    // console.log('Email sent: ' + info.response);
-      return res.status(201).json({
-          msg: "you should receive an email"
-      })
+}
+if (error) {
+  console.log(error);
+} else {
+  console.log('Email sent');
+}
+
+    
+      
   }).catch(error => {
-      return res.status(500).json({ error })
+      console.error(error);
   })
 
 
@@ -63,7 +70,7 @@ let response = {
 
 let mail = MailGenerator.generate(response)
 
-let message = {
+const options= {
    
     from: `ComradesBizna <${EMAIL}>`,
     to: `${email}`,
@@ -71,7 +78,7 @@ let message = {
     html:mail
 
 }
-sendMail(message)
+sendMail(options)
 }
 
 const contactUs=({name,email,phone,message})=>{
@@ -126,7 +133,7 @@ const contactUs=({name,email,phone,message})=>{
   }
 }
 let mail = MailGenerator.generate(response);
-let message = {
+const options = {
    
   from: `ComradesBizna <${email}>`,
   to: `${EMAIL}`,
@@ -134,7 +141,7 @@ let message = {
   html:mail
 
 }
-sendMail(message)
+sendMail(options)
 }
 
 
