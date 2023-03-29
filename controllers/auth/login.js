@@ -1,4 +1,5 @@
 const User = require("../../models/user");
+const bcrypt = require('bcrypt');
 
 async function loginUser(req, res) {
     try {
