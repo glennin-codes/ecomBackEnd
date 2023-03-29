@@ -64,7 +64,11 @@ const verify={
 }
     VerifyEmail(verify);
 
-    res.status(201).json({ token });
+    res.status(201).json({ token ,
+     email:user.email,
+    name: user.name,
+    id:user._id
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
