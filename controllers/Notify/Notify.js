@@ -17,22 +17,60 @@ router.post('/notify-seller', async (req, res) => {
         }
       });
 
-      const mailOptions = {
-        from: buyer.email,
-        to: foundProduct.sellerEmail,
-        subject: 'New order from a buyer',
-        text: `
-          Hello,
+const Mailgen = require('mailgen');
+const mailGenerator = new Mailgen({
+  theme: 'default',
+  product: {
+    name: 'ComradeBiz',
+    link: 'https://comradeBiz.live/',
+    // Add your product image here
+    // The image should be hosted on a public URL
+    // You can use the product.image[0] property if it contains the image URL
+    logo: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80',
+  },
+});
 
-          You have a new order from ${buyer.name} (${buyer.email}, ${buyer.contact}) for the following product:
+// Generate an HTML email using Mailgen
+const email = {
+  body: {
+    name: foundProduct.sellerName,
+    intro: 'A client has inquired about your Product:',
+    table: {
+      data: [
+        {
+          item: product.name,
+          description: product.category,
+        },
+      ],
+      columns: {
+        customWidth: {
+          item: '20%',
+          description: '80%',
+        },
+        customAlignment: {
+          item: 'left',
+          description: 'left',
+        },
+      },
+    },
+    outro: 'Please contact the buyer to arrange the details of the transaction.',
+  productImage: {
+      link: product.image[0],
+      alt: 'Product image'
+    }
+  },
+};
 
-          ${product.product_id} - ${product.seller_email}
+const emailBody = mailGenerator.generate(email);
 
-          Please contact the buyer to arrange the details of the transaction.
 
-          Thank you.
-        `
-      };
+const mailOptions = {
+  from: buyer.email,
+  to: foundProduct.sellerEmail,
+  subject: 'New order from a buyer',
+  html: emailBody,
+  
+};
 
       return new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, (error, info) => {
