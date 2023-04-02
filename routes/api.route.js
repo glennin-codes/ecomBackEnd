@@ -5,6 +5,7 @@ const verifyCode = require('../controllers/auth/verifyingCode');
 const deleteProduct = require('../controllers/deleteProduct');
 const getAllProducts = require('../controllers/getAllProduct');
 const getSingleProduct = require('../controllers/getSingleProduct');
+const Notify = require('../controllers/Notify/Notify');
 const updateProduct = require('../controllers/updateProduct');
 const deleteUser = require('../controllers/User/DeleteUser');
 const getAllUsers = require('../controllers/User/getAllUser');
@@ -26,6 +27,7 @@ router.get('/products/:dataAmount',getAllProducts)
 router.route('/product/:id').get(getSingleProduct).delete(authenticateToken,deleteProduct).patch(authenticateToken,updateProduct)
 router.route('/user/:id').put(authenticateToken,UpdateUser).delete(authenticateToken,deleteUser).get(getSingleUser);
 router.route('/user/').get(getAllUsers).post(registerUser);
-router.post('/user/login',loginUser)
+router.post('/user/login',loginUser);
+router.post('/notify/emails',Notify)
 
 module.exports = router;

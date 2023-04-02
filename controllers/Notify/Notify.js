@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-const { Product } = require('../models/product');
+const { EMAIL, PASSWORD } = require('../../Emails/Contactus/util/Config');
 
-router.post('/notify-seller', async (req, res) => {
+
+const Notify= async (req, res) => {
   const { products, buyer } = req.body;
 
   const promises = products.map(async (product) => {
-    const foundProduct = await Product.findById(product.product_id);
-    if (foundProduct) {
+   
+    if (product) {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'your_email@gmail.com', // replace with your own email address
-          pass: 'your_email_password' // replace with your own email password
+          user:EMAIL, // replace with your own email address
+          pass: PASSWORD// replace with your own email password
         }
       });
 
@@ -33,14 +34,22 @@ const mailGenerator = new Mailgen({
 // Generate an HTML email using Mailgen
 const email = {
   body: {
-    name: foundProduct.sellerName,
-    intro: 'A client has inquired about your Product:',
+    name: product.user,
+    intro: `A client has inquired about your Product:
+    Name: ${buyer.name}
+    Phone: ${buyer.phone}
+    Email: ${buyer.email}
+    Message: ${buyer.message}`,
     table: {
       data: [
         {
           item: product.name,
-          description: product.category,
+          description: `Price: ${product.price}
+          Category: ${product.category}
+          Description: ${product.description}`,
+
         },
+
       ],
       columns: {
         customWidth: {
@@ -55,7 +64,7 @@ const email = {
     },
     outro: 'Please contact the buyer to arrange the details of the transaction.',
   productImage: {
-      link: product.image[0],
+      link: product.image[0].url,
       alt: 'Product image'
     }
   },
@@ -66,8 +75,8 @@ const emailBody = mailGenerator.generate(email);
 
 const mailOptions = {
   from: buyer.email,
-  to: foundProduct.sellerEmail,
-  subject: 'New order from a buyer',
+  to: product.user,
+  subject: 'New order from a client',
   html: emailBody,
   
 };
@@ -76,25 +85,28 @@ const mailOptions = {
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
             console.log(error);
+           
             reject(error);
           } else {
             console.log('Email sent: ' + info.response);
+            
             resolve(info);
           }
         });
       });
     } else {
-      return Promise.reject(new Error(`No seller email found for product ${product.product_id}.`));
+      return Promise.reject(new Error(`No seller email found`));
     }
   });
 
   try {
     const results = await Promise.all(promises);
+    console.log(results);
     res.status(200).json({ message: 'Notification emails sent successfully.' });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'An error occurred while sending the notification emails.' });
   }
-});
+}
 
-module.exports = router;
+module.exports = Notify;
