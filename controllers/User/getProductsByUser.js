@@ -1,6 +1,6 @@
 const ProductSchema = require("../../models/ProductSchema");
 
-const getProductByUser=async (req,res,next)=>{
+const getProductByUser=async (req,res)=>{
     const email = req.params.email;
    try{
     const data= await ProductSchema.find({ user:email});
@@ -11,7 +11,6 @@ const getProductByUser=async (req,res,next)=>{
         console.error(error);
         res.status(500).json({ message: 'server error' });
     
-        next(error)
     }
    
    
