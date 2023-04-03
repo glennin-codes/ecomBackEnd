@@ -7,6 +7,8 @@ const Mailgen = require('mailgen');
 
 const Notify= async (req, res) => {
   const { buyer,products } = req.body;
+  console.log(products);
+  console.log(typeof products);
   const promises = products && products.map(async (product) => {
   
     if (product) {
