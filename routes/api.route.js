@@ -30,6 +30,6 @@ router.route('/user/:id').put(authenticateToken,UpdateUser).delete(authenticateT
 router.route('/user/').get(getAllUsers).post(registerUser);
 router.post('/user/login',loginUser);
 router.post('/notify/emails',Notify);
-router.get('/user/products',authenticateToken,getProductByUser);
+router.route('/user/products/:email').get(getProductByUser);
 
 module.exports = router;
