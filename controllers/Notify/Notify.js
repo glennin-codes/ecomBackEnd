@@ -7,9 +7,8 @@ const Mailgen = require('mailgen');
 
 const Notify= async (req, res) => {
   const { buyer,products } = req.body;
-
-  const promises = products.map(async (product) => {
-   
+  const promises = products && products.map(async (product) => {
+  
     if (product) {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -64,7 +63,7 @@ const email = {
     },
     outro: 'Please contact the buyer to arrange the details of the transaction.',
   productImage: {
-      link: product.image[0].url,
+      link: product.image,
       alt: 'Product image'
     }
   },
