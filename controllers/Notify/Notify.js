@@ -76,7 +76,7 @@ const emailBody = mailGenerator.generate(email);
 
 const mailOptions = {
   from: buyer.email,
-  to: product.user,
+  to:EMAIL,
   subject: 'New order from a client',
   html: emailBody,
   
