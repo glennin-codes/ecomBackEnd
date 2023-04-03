@@ -45,13 +45,13 @@ let MailGenerator = new Mailgen({
   theme: 'default',
   product: {
     name: 'ComradesBiz Association',
-    link: 'shopify-omega-green.vercel.app',
+    link: 'https://www.comradesbiz.live',
     logo: 'https://imgs.search.brave.com/jUDBL1q0lAoPiM4Y3REgL5E_D4jw35FfxF4oySSr6G4/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4y/MFJiVThQalV1NW9w/OFg3NVFiUURnSGFF/OCZwaWQ9QXBp'
   }
 })
 // generate the email body with verification URL link
 
-const verificationLink = `https://shopify-adminbiz.vercel.app/verifyCode?email=${email}&code=${code} `; 
+const verificationLink = `https://www.comradesbiz.live/verifyCode?email=${email}&code=${code} `; 
 let response = {
   body: {
     name: `${name}`,
@@ -86,7 +86,7 @@ const contactUs=({name,email,phone,message})=>{
     theme: 'default',
     product: {
       name: 'ComradesBiz Association',
-      link: 'shopify-omega-green.vercel.app',
+      link: 'https://www.comradesbiz.live',
       logo: 'https://imgs.search.brave.com/jUDBL1q0lAoPiM4Y3REgL5E_D4jw35FfxF4oySSr6G4/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC4y/MFJiVThQalV1NW9w/OFg3NVFiUURnSGFF/OCZwaWQ9QXBp'
     }
   })

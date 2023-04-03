@@ -23,7 +23,7 @@ const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
     name: 'ComradeBiz',
-    link: 'https://comradeBiz.live',
+    link: 'https://www.comradesbiz.live',
     // Add your product image here
     // The image should be hosted on a public URL
     // You can use the product.image[0] property if it contains the image URL
