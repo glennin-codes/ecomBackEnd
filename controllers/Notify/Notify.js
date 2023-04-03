@@ -36,19 +36,20 @@ const mailGenerator = new Mailgen({
 const email = {
   body: {
     name: product.user,
-    intro: `A client has inquired about your Product:
-    Name: ${buyer.name}
-    Phone: ${buyer.phone}
-    Email: ${buyer.email}
-    Message: ${buyer.message}`,
+    intro: 'A client has inquired about your Product: ',
+
     table: {
       data: [
         {
-          item: product.name,
-          description: `Price: ${product.price}
-          Category: ${product.category}
-          Description: ${product.description}`,
+              Name: `${buyer.name}`,
+    Phone: `${buyer.phone}`,
+    Email: `${buyer.email}`,
+    Message: `${buyer.message}`,
+          item: `${product.name}`,
+           Price: `${product.price}`,
 
+
+         
         },
 
       ],
