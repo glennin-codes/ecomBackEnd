@@ -6,7 +6,7 @@ const { EMAIL, PASSWORD } = require('../../Emails/Contactus/util/Config');
 const Mailgen = require('mailgen');
 
 const Notify= async (req, res) => {
-  const { products, buyer } = req.body;
+  const { buyer,products } = req.body;
 
   const promises = products.map(async (product) => {
    
