@@ -3,7 +3,7 @@ const ProductSchema = require("../../models/ProductSchema");
 const getProductByUser=async (req,res,next)=>{
     const email = req.params.email;
    try{
-    const data= await ProductSchema.find({ user:id});
+    const data= await ProductSchema.find({ user:email});
     res.status(200).json(data)
 
     }catch(error){
@@ -16,3 +16,4 @@ const getProductByUser=async (req,res,next)=>{
    
    
 }
+module.exports=getProductByUser;
