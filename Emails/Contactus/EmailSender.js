@@ -72,7 +72,7 @@ let mail = MailGenerator.generate(response)
 
 const options= {
    
-    from: `ComradesBizna <${EMAIL}>`,
+    from: `ComradesBiz <${EMAIL}>`,
     to: `${email}`,
     subject: `Message From  ComradesBiz Email verification`,
     html:mail
@@ -135,7 +135,7 @@ const contactUs=({name,email,phone,message})=>{
 let mail = MailGenerator.generate(response);
 const options = {
    
-  from: `ComradesBizna <${email}>`,
+  from: ` ${email}`,
   to: `${EMAIL}`,
   subject: `Message From  ComradesBiz ..a customer Enquiry`,
   html:mail
