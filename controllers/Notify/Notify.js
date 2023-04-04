@@ -6,10 +6,11 @@ const { EMAIL, PASSWORD } = require('../../Emails/Contactus/util/Config');
 const Mailgen = require('mailgen');
 
 const Notify= async (req, res) => {
-  const { products, buyer } = req.body;
-
-  const promises = products.map(async (product) => {
-   
+  const { buyer,products } = req.body;
+  console.log(products);
+  console.log(typeof products);
+  const promises = products && products.map(async (product) => {
+  
     if (product) {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -35,19 +36,20 @@ const mailGenerator = new Mailgen({
 const email = {
   body: {
     name: product.user,
-    intro: `A client has inquired about your Product:
-    Name: ${buyer.name}
-    Phone: ${buyer.phone}
-    Email: ${buyer.email}
-    Message: ${buyer.message}`,
+    intro: 'A client has inquired about your Product: ',
+
     table: {
       data: [
         {
-          item: product.name,
-          description: `Price: ${product.price}
-          Category: ${product.category}
-          Description: ${product.description}`,
+              Name: `${buyer.name}`,
+    Phone: `${buyer.phone}`,
+    Email: `${buyer.email}`,
+    Message: `${buyer.message}`,
+          item: `${product.name}`,
+           Price: `${product.price}`,
 
+
+         
         },
 
       ],
@@ -64,7 +66,7 @@ const email = {
     },
     outro: 'Please contact the buyer to arrange the details of the transaction.',
   productImage: {
-      link: product.image[0].url,
+      link: product.image,
       alt: 'Product image'
     }
   },
@@ -75,7 +77,7 @@ const emailBody = mailGenerator.generate(email);
 
 const mailOptions = {
   from: buyer.email,
-  to: product.user,
+  to:EMAIL,
   subject: 'New order from a client',
   html: emailBody,
   
