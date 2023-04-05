@@ -34,42 +34,50 @@ const mailGenerator = new Mailgen({
 
 // Generate an HTML email using Mailgen
 const email = {
-  body: {
-    name: product.user,
-    intro: 'A client has inquired about your Product: ',
-
+    body: {
+    name: buyer.name,
+    intro: `A new  client as requested your product!`,
     table: {
       data: [
         {
-              Name: `${buyer.name}`,
-    Phone: `${buyer.phone}`,
-    Email: `${buyer.email}`,
-    Message: `${buyer.message}`,
-          item: `${product.name}`,
-           Price: `${product.price}`,
-
-
-         
-        },
-
+          Name: `${buyer.name}`,
+          Phone: `${buyer.phone}`,
+          Email: `${buyer.email}`,
+          Message: `${buyer.message}`,
+          Item: `${product.name}`,
+          Price: `${product.price}`,
+          Image: {
+            img: product.image,
+            alt: 'product image'
+          }
+        }
       ],
       columns: {
         customWidth: {
-          item: '20%',
-          description: '80%',
+          Name: '10%',
+          Phone: '10%',
+          Email: '20%',
+          Message: '20%',
+          Item: '10%',
+          Price: '10%',
+          Image: '20%'
         },
         customAlignment: {
-          item: 'left',
-          description: 'left',
-        },
-      },
+          Price: 'right'
+        }
+      }
     },
-    outro: 'Please contact the buyer to arrange the details of the transaction.',
-  productImage: {
-      link: product.image,
-      alt: 'Product image'
-    }
-  },
+    action: {
+      instructions: 'Please contact the buyer to arrange the details of the transaction.',
+      button: {
+        color: '#33b5e5',
+        text: 'Contact Buyer',
+        link: 'mailto:' + buyer.email
+      }
+    },
+    outro: 'Thank you for using our service!',
+    signature: 'Best regards,\nComradesBiz'
+  }
 };
 
 const emailBody = mailGenerator.generate(email);
@@ -77,7 +85,7 @@ const emailBody = mailGenerator.generate(email);
 
 const mailOptions = {
   from: buyer.email,
-  to:EMAIL,
+  to:product.user,
   subject: 'New order from a client',
   html: emailBody,
   

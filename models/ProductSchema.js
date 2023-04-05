@@ -51,6 +51,18 @@ const mongoose =  require('mongoose')
     user: {
       type: String,
     },
+    featured:{
+      type:Boolean,
+      default:false
+  
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+ 
+
+
   });
   
   module.exports=mongoose.model('Products',productSchema);
