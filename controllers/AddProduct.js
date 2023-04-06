@@ -4,6 +4,7 @@ const cloudinary = require("../utils/Cloudinary");
 const addProducts = async (req, res, next) => {
   try {
     const {
+      user,
       name,
       company,
       description,
@@ -25,6 +26,7 @@ const addProducts = async (req, res, next) => {
     const imageObjects = imageResponses.map(({ color, url, public_id }) => ({ filename: public_id, url, product_id: public_id, color }));
     
     const product = new ProductSchema({
+      user,
       name,
       company,
       description,
