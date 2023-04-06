@@ -1,29 +1,27 @@
-const express = require('express');
-const router = express.Router();
-const nodemailer = require('nodemailer');
-const Mailgen = require('mailgen');
-const { EMAIL, PASSWORD } = process.env;
+const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
+const { EMAIL, PASSWORD } = require("../../Emails/Contactus/util/Config");
 
 const Notify = async (req, res) => {
   const { buyer, products } = req.body;
 
   const promises = products.map(async (product) => {
     if (product.user) {
-      console.log('user',product.user);
+      console.log("user", product.user);
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
           user: EMAIL,
-          pass: PASSWORD
-        }
+          pass: PASSWORD,
+        },
       });
 
       const mailGenerator = new Mailgen({
-        theme: 'default',
+        theme: "default",
         product: {
-          name: 'ComradeBiz',
-          link: 'https://www.comradesbiz.live',
-          logo: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80',
+          name: "ComradeBiz",
+          link: "https://www.comradesbiz.live",
+          logo: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80",
         },
       });
 
@@ -43,64 +41,65 @@ const Notify = async (req, res) => {
                   Price: `${product.price}`,
                   Image: {
                     img: product.image,
-                    alt: 'product image'
-                  }
-                }
+                    alt: "product image",
+                  },
+                },
               ],
               columns: {
                 customWidth: {
-                  Name: '10%',
-                  Phone: '10%',
-                  Email: '20%',
-                  Message: '20%',
-                  Item: '10%',
-                  Price: '10%',
-                  Image: '20%'
+                  Name: "10%",
+                  Phone: "10%",
+                  Email: "20%",
+                  Message: "20%",
+                  Item: "10%",
+                  Price: "10%",
+                  Image: "20%",
                 },
                 customAlignment: {
-                  Price: 'right'
-                }
-              }
+                  Price: "right",
+                },
+              },
             },
             action: {
-              instructions: 'Please contact the buyer to arrange the details of the transaction.',
+              instructions:
+                "Please contact the buyer to arrange the details of the transaction.",
               button: {
-                color: '#33b5e5',
-                text: 'Contact Buyer',
-                link: 'mailto:' + buyer.email
-              }
+                color: "#33b5e5",
+                text: "Contact Buyer",
+                link: "mailto:" + buyer.email,
+              },
             },
-            outro: 'Thank you for using our service!',
-            signature: 'Best regards,\nComradesBiz'
-          }
+            outro: "Thank you for using our service!",
+            signature: "Best regards,\nComradesBiz",
+          },
         });
 
         const mailOptions = {
           from: buyer.email,
           to: product.user,
-          subject: 'New order from a client',
+          subject: "New order from a client",
           html: emailBody,
         };
 
         const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent: ' + info.response);
+        console.log("Email sent: " + info.response);
         return info;
       } catch (error) {
         console.log(error);
-        throw new Error('Error generating email');
+        throw new Error("Error generating email");
       }
     } else {
       throw new Error(`No seller email found for product ${product.name}`);
     }
   });
-try {
-  const results = await Promise.all(promises);
+  try {
+    const results = await Promise.all(promises);
 
-  console.log('All emails sent',results);
-  res.status(200).json({ message: 'All emails sent' });
-} catch (error) {
-  console.log(error);
-  res.status(500).json({ message: 'Error sending emails' });
-}
+    console.log("All emails sent", results);
+    res.status(200).json({ message: "All emails sent" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error sending emails" });
+  }
 };
-module.export=Notify;
+module.export = Notify;
