@@ -6,6 +6,7 @@ const Notify = async (req, res) => {
   const { buyer, products } = req.body;
 
   const promises = products.map(async (product) => {
+  console.log('user',product.user)
     if (product.user) {
       console.log("user", product.user);
       const transporter = nodemailer.createTransport({
