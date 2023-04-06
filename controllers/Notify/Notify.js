@@ -102,4 +102,4 @@ const Notify = async (req, res) => {
     res.status(500).json({ message: "Error sending emails" });
   }
 };
-module.export = Notify;
+module.exports = Notify;
