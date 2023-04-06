@@ -12,6 +12,8 @@ const Notify= async (req, res) => {
   const promises = products && products.map(async (product) => {
   
     if (product) {
+console.log('products',product);
+console.log('user',user);
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
