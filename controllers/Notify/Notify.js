@@ -40,6 +40,7 @@ const Notify = async (req, res) => {
                   Email: `${buyer.email}`,
                   Message: `${buyer.message}`,
                   Item: `${product.name}`,
+                  Amount: `${product.amount}`,
                   Price: `${product.price}`,
                   Image: {
                     img: product.image,
@@ -54,8 +55,9 @@ const Notify = async (req, res) => {
                   Email: "20%",
                   Message: "20%",
                   Item: "10%",
+                  Amount: "10%",
                   Price: "10%",
-                  Image: "20%",
+                  Image: "10%",
                 },
                 customAlignment: {
                   Price: "right",

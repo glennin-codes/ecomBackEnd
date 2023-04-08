@@ -12,13 +12,15 @@ if (!product) return res.status(404).send({msg:"item with the given id not found
 
     // Delete the images from Cloudinary
     //you can also choose to delete one using cloudinary.upload.destroy(publicID)
+   if (productIds){
     await cloudinary.api.delete_resources(productIds);
      
-
+   }
     // Delete the product from the database
     await ProductSchema.deleteOne({ _id: req.params.id });
 
     res.status(200).send({ message: 'Product deleted successfully' });
+  
   } catch (error) {
  
     next(error);

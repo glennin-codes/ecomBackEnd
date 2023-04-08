@@ -8,8 +8,10 @@ const Delete = async () => {
   const Url = process.env.Mongo_Url;
   try {
     await connect(Url)
-    await User.deleteMany();
-    await ProductSchema.deleteMany()
+    // await User.deleteMany();
+    // await ProductSchema.deleteMany()
+    await ProductSchema.deleteOne({ _id: "642fd1d33952e85efd61038e" });
+    await ProductSchema.deleteOne({ _id: "642fd2bd3952e85efd6103ae" });
     console.log("deleted users && products");
   } catch (error) {
     console.error(error);
