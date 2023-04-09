@@ -30,7 +30,7 @@ const Notify = async (req, res) => {
       try {
         const emailBody = mailGenerator.generate({
           body: {
-            name: buyer.name,
+            name: product.user,
             intro: `A new client has requested your product!`,
             table: {
               data: [
