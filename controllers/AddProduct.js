@@ -13,7 +13,9 @@ const addProducts = async (req, res, next) => {
       stars,
       reviews,
       price,
-      images, // array of { file: File, color: string } objects
+      images,
+      featured,
+       // array of { file: File, color: string } objects
     } = req.body;
     
     const promises = images.map(async ({ data, color }) => {
@@ -34,6 +36,7 @@ const addProducts = async (req, res, next) => {
       stock,
       stars,
       reviews,
+      featured,
       price,
       image: imageObjects,
       colors: [...new Set(images.map(({ color }) => color))],
