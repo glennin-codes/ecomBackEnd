@@ -56,6 +56,15 @@ const mongoose =  require('mongoose')
       default:false
   
     },
+    New:{  
+      type:Boolean,
+      default:true,
+    },
+    secondHand:{
+        type:Boolean,
+        default:true,
+    },
+
     createdAt: {
       type: Date,
       default: Date.now,

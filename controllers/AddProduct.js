@@ -37,8 +37,11 @@ const addProducts = async (req, res, next) => {
       stars,
       reviews,
       featured,
+      New,
       price,
+      secondHand,
       image: imageObjects,
+      
       colors: [...new Set(images.map(({ color }) => color))],
     });
     
