@@ -10,9 +10,16 @@ const Delete = async () => {
     await connect(Url)
     // await User.deleteMany();
     // await ProductSchema.deleteMany()
-    await ProductSchema.deleteOne({ _id: "642fd1d33952e85efd61038e" });
-    await ProductSchema.deleteOne({ _id: "642fd2bd3952e85efd6103ae" });
-    console.log("deleted users && products");
+    
+    // console.log("deleted users && products");
+     await ProductSchema.updateMany({}, { featured: false,isClean:false, secondHand:false }, (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Updated documents:', res.nModified);
+      }
+    });
+    
   } catch (error) {
     console.error(error);
   }
