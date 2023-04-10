@@ -14,6 +14,7 @@ const UpdateUser= async (req, res) => {
         school,
         longitude,
         latitude
+        
       }, { new: true });
   
       if (!updatedUser) {

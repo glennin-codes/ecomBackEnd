@@ -42,6 +42,9 @@ const mongoose =  require('mongoose')
         },
         product_id:{
             type:String,
+        },
+        thumbnailUrl:{
+            type:String,
         }
       }
     ],
@@ -56,13 +59,13 @@ const mongoose =  require('mongoose')
       default:false
   
     },
-    New:{  
+    isClean:{  
       type:Boolean,
-      default:true,
+      default:false,
     },
     secondHand:{
         type:Boolean,
-        default:true,
+        default:false,
     },
 
     createdAt: {
