@@ -40,9 +40,11 @@ const addProducts = async (req, res, next) => {
         ],
       });
       const thumbnailUrl = secure_url.replace(public_id, `${public_id}_thumbnail`);
+      console.log('thambnailUrl',thumbnailUrl);
       return { color, url: secure_url, public_id, thumbnailUrl };
     });
-    console.log(images)
+    console.log(images);
+    
     const imageResponses = await Promise.all(promises);
     
     const imageObjects = imageResponses.map(({ color, url, public_id, thumbnailUrl }) => ({
