@@ -14,6 +14,7 @@ const deleteUser = async (req, res) => {
     if (products.length === 0) {
       console.log("No products found for user");
     } else {
+      
       // Retrieve the product_ids from the images array of all the products
       const productIds = products
         .map((product) => product.image.map((image) => image.product_id))
