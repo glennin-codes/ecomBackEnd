@@ -28,7 +28,7 @@ const addProducts = async (req, res, next) => {
             width: 320,
             height: 300,
             crop: "fill",
-            gravity: "center",
+            // gravity: "center",
             format: "webp",
             quality: "auto",
             fetch_format: "auto",
