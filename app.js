@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 
 app.get('/', async (req, res, next) => {
-  res.send({ message: 'Awesome it works 🐻' });
+  res.send({ message: 'Awesome it works 🐻 ' });
 });
 
 

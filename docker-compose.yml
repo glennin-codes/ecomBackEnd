@@ -1,8 +1,11 @@
 version: '3'
 services:
   comradesapi:
+    build: 
+     context: .
+     args:
+       - Node_env=development
     ports:
       - 3000:8000
     env_file:
       - ./.env
-      
