@@ -1,0 +1,12 @@
+version: '3'
+services:
+  comradesapi:
+     build: .
+     ports:
+       - "3000:8000"
+     volumes:
+       - ./:/app:ro
+       - /app/node_modules
+     env_file:
+        - ./.env
+           

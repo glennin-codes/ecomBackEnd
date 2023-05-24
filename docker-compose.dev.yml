@@ -1,0 +1,7 @@
+version: '3'
+services:
+  comradesapi:
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    
